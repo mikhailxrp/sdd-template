@@ -1,0 +1,10 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Блокировать прямой доступ к служебным папкам и файлам
+RewriteRule ^(src|config|database|storage|\.docs|\.git|\.env)(/|$) - [F,L]
+
+# Всё остальное → public/index.php
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]

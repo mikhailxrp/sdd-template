@@ -1,0 +1,11 @@
+.env
+storage/logs/*.log
+storage/cache/*
+!storage/cache/rate-limit/
+storage/cache/rate-limit/*
+!storage/cache/rate-limit/.gitkeep
+storage/temp/*
+.DS_Store
+Thumbs.db
+/vendor/
+/.phpunit.cache/
