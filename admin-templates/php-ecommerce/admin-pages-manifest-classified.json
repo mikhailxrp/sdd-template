@@ -1,0 +1,456 @@
+[
+  {
+    "id": "index",
+    "file": "html/index.html",
+    "menu_category": "Main",
+    "description": "Главный дашборд: приветствие пользователя, сводные показатели (выручка), виджеты продаж по клиентам/регионам",
+    "reusable_across": "специфично: e-commerce дашборд (выручка/продажи) — переделать под нишу",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "icons",
+    "file": "html/icons.html",
+    "menu_category": "General",
+    "description": "Витрина всех подключённых наборов иконок (Feather и остальные) с их классами",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "витрина иконок самого кита — не рабочая страница",
+    "status": "removed"
+  },
+  {
+    "id": "full-calendar",
+    "file": "html/full-calendar.html",
+    "menu_category": "Web Apps",
+    "description": "Календарь на базе FullCalendar с демонстрационными событиями",
+    "reusable_across": "универсально: любой проект с планированием/бронированием",
+    "extra_deps": [
+      "fullcalendar"
+    ],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "contacts",
+    "file": "html/contacts.html",
+    "menu_category": "Web Apps",
+    "description": "Список контактов (карточки/строки с именем, аватаром и данными для связи)",
+    "reusable_across": "универсально: адресная книга для любого CRM/админки",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "notifications",
+    "file": "html/notifications.html",
+    "menu_category": "Web Apps",
+    "description": "Демонстрация вызова всплывающих уведомлений (toast): базовые, async с ошибкой/успехом и другие варианты",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "демонстрация вызова toast, не отдельная бизнес-страница",
+    "status": "removed"
+  },
+  {
+    "id": "treeview",
+    "file": "html/treeview.html",
+    "menu_category": "Web Apps",
+    "description": "Демонстрация иерархического списка (treeview) с раскрывающимися вложенными узлами",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "демонстрация UI-компонента, не бизнес-функция; решение пересмотрено: несмотря на candidate_for_removal, оставлена как источник паттерна для admin-missing-pages.json",
+    "status": "kept-as-reference"
+  },
+  {
+    "id": "file-manager",
+    "file": "html/file-manager.html",
+    "menu_category": "Web Apps",
+    "description": "Файловый менеджер: сетка (grid) папок и файлов с кнопками действий и фильтром",
+    "reusable_across": "универсально: если нужно управление файлами/медиатекой",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "file-manager-list",
+    "file": "html/file-manager-list.html",
+    "menu_category": "Web Apps",
+    "description": "Файловый менеджер: список файлов и папок в табличном/строчном виде",
+    "reusable_across": "универсально, дубль вида file-manager",
+    "extra_deps": [],
+    "candidate_for_removal": false,
+    "note": "выбрать один вид (grid или list), не оба"
+  },
+  {
+    "id": "file-manager-details",
+    "file": "html/file-manager-details.html",
+    "menu_category": "Web Apps",
+    "description": "Детальная карточка одного файла: превью, метаданные, связанные действия",
+    "reusable_across": "универсально, дополняет file-manager",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "search",
+    "file": "html/search.html",
+    "menu_category": "Web Apps",
+    "description": "Страница результатов поиска по сайту/приложению",
+    "reusable_across": "универсально: если в проекте есть глобальный поиск по данным",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "userlist",
+    "file": "html/userlist.html",
+    "menu_category": "Web Apps",
+    "description": "Список пользователей в табличном виде с действиями (редактировать/удалить/поиск)",
+    "reusable_across": "универсально: список пользователей (не то же самое, что клиенты магазина)",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "blog",
+    "file": "html/blog.html",
+    "menu_category": "Web Apps",
+    "description": "Лента статей блога (список карточек постов)",
+    "reusable_across": "опционально: если у проекта есть блог/новости",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "blog-details",
+    "file": "html/blog-details.html",
+    "menu_category": "Web Apps",
+    "description": "Полный текст одной статьи блога с комментариями",
+    "reusable_across": "опционально, дополняет blog",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "blog-post",
+    "file": "html/blog-post.html",
+    "menu_category": "Web Apps",
+    "description": "Форма создания/редактирования статьи блога",
+    "reusable_across": "опционально, дополняет blog (форма редактирования)",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "grid-tables",
+    "file": "html/grid-tables.html",
+    "menu_category": "Components",
+    "description": "Интерактивная таблица данных на базе библиотеки Grid.js (пагинация, сортировка, скрытие колонок)",
+    "reusable_across": null,
+    "extra_deps": [
+      "gridjs"
+    ],
+    "candidate_for_removal": true,
+    "note": "демо-страница Grid.js — дубль data-tables",
+    "status": "removed"
+  },
+  {
+    "id": "data-tables",
+    "file": "html/data-tables.html",
+    "menu_category": "Components",
+    "description": "Интерактивная таблица данных на базе DataTables.net (поиск, сортировка, экспорт)",
+    "reusable_across": "универсально: любая таблица данных с сортировкой/поиском",
+    "extra_deps": [
+      "datatables"
+    ],
+    "candidate_for_removal": false,
+    "note": "предпочтительнее grid-tables — более известная библиотека"
+  },
+  {
+    "id": "landing-page",
+    "file": "html/landing-page.html",
+    "menu_category": "Components",
+    "description": "Маркетинговая landing-страница с описанием возможностей и преимуществ продукта",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "маркетинговый лендинг внутри админки — не нужен вообще",
+    "status": "removed"
+  },
+  {
+    "id": "profile",
+    "file": "html/profile.html",
+    "menu_category": "Pages",
+    "description": "Публичный профиль пользователя: аватар, статистика, лента активности, соцсети",
+    "reusable_across": "универсально: профиль сотрудника/пользователя админки",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "editprofile",
+    "file": "html/editprofile.html",
+    "menu_category": "Pages",
+    "description": "Форма редактирования данных профиля пользователя",
+    "reusable_across": "универсально, дополняет profile",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "about",
+    "file": "html/about.html",
+    "menu_category": "Pages",
+    "description": "Страница «О компании» с описанием команды/истории",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "демо-страница «о компании», не функция админки",
+    "status": "removed"
+  },
+  {
+    "id": "settings",
+    "file": "html/settings.html",
+    "menu_category": "Pages",
+    "description": "Страница настроек аккаунта (вкладки: профиль, безопасность, уведомления и т.д.)",
+    "reusable_across": "универсально: настройки аккаунта сотрудника",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "invoice",
+    "file": "html/invoice.html",
+    "menu_category": "Pages",
+    "description": "Печатная форма счёта/накладной с позициями, суммой и реквизитами",
+    "reusable_across": "специфично: e-commerce/B2B — печатная форма счёта",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "pricing",
+    "file": "html/pricing.html",
+    "menu_category": "Pages",
+    "description": "Страница тарифных планов с сравнением цен и функций",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "демо тарифных планов SaaS — не нужно для магазина",
+    "status": "removed"
+  },
+  {
+    "id": "gallery",
+    "file": "html/gallery.html",
+    "menu_category": "Pages",
+    "description": "Галерея изображений с фильтрами/лайтбоксом",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "демо-галерея, не связана с бизнес-функцией; решение пересмотрено: несмотря на candidate_for_removal, оставлена как источник паттерна для admin-missing-pages.json",
+    "status": "kept-as-reference"
+  },
+  {
+    "id": "todotask",
+    "file": "html/todotask.html",
+    "menu_category": "Pages",
+    "description": "Список задач (todo) с возможностью отметить выполнение и категориями",
+    "reusable_across": "опционально: внутренние задачи сотрудников (не заказы)",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "faq",
+    "file": "html/faq.html",
+    "menu_category": "Pages",
+    "description": "Страница часто задаваемых вопросов (аккордеон вопрос-ответ)",
+    "reusable_across": "опционально: FAQ для сотрудников/справка по админке",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "empty",
+    "file": "html/empty.html",
+    "menu_category": "Pages",
+    "description": "Пустой шаблон страницы (только каркас шапки/сайдбара) — заготовка для новой страницы",
+    "reusable_across": "служебное: заготовка для новой страницы",
+    "extra_deps": [],
+    "candidate_for_removal": false,
+    "note": "оставить как шаблон, не показывать клиенту"
+  },
+  {
+    "id": "mail",
+    "file": "html/mail.html",
+    "menu_category": "Pages",
+    "description": "Почтовый клиент: список папок и писем во входящих",
+    "reusable_across": "опционально: встроенная почта — ваш кейс 'emails'",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "mail-compose",
+    "file": "html/mail-compose.html",
+    "menu_category": "Pages",
+    "description": "Форма создания нового письма с вложениями",
+    "reusable_across": "опционально, дополняет mail",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "mail-read",
+    "file": "html/mail-read.html",
+    "menu_category": "Pages",
+    "description": "Просмотр одного письма с историей переписки и кнопкой ответа",
+    "reusable_across": "опционально, дополняет mail",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "mail-settings",
+    "file": "html/mail-settings.html",
+    "menu_category": "Pages",
+    "description": "Настройки почтового клиента (подпись, фильтры, уведомления)",
+    "reusable_across": "опционально, дополняет mail",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "chat",
+    "file": "html/chat.html",
+    "menu_category": "Pages",
+    "description": "Мессенджер: список диалогов и окно переписки",
+    "reusable_across": "опционально: единый чат — ваш кейс 'chats' под интеграцию мессенджеров",
+    "extra_deps": [],
+    "candidate_for_removal": false,
+    "note": "потребует доработки под конкретных провайдеров (WhatsApp/Telegram/VK)"
+  },
+  {
+    "id": "products",
+    "file": "html/products.html",
+    "menu_category": "Pages",
+    "description": "Каталог товаров: сетка карточек с фото, ценой и рейтингом (кнопки «в корзину»/«в избранное» удалены как обломки клиентской витрины)",
+    "reusable_across": "специфично: e-commerce — витрина товаров ВНУТРИ админки",
+    "extra_deps": [],
+    "candidate_for_removal": false,
+    "note": "проверить: не дублирует ли FR-ADM управление товарами; реальное управление каталогом — в product-list-admin (см. admin-missing-pages.json), эта страница остаётся только как визуальный референс карточки товара",
+    "page_role": "справочный/просмотровый вид — не рабочая страница управления"
+  },
+  {
+    "id": "product-details",
+    "file": "html/product-details.html",
+    "menu_category": "Pages",
+    "description": "Карточка одного товара: фото, описание, цена (кнопка «добавить в корзину» удалена как обломок клиентской витрины)",
+    "reusable_across": "специфично: e-commerce, дополняет products",
+    "extra_deps": [],
+    "candidate_for_removal": false,
+    "page_role": "справочный/просмотровый вид — не рабочая страница управления",
+    "note": "реальное управление товаром — в product-list-admin / product-form-admin (см. admin-missing-pages.json), эта страница остаётся только как визуальный референс карточки товара"
+  },
+  {
+    "id": "product-cart",
+    "file": "html/product-cart.html",
+    "menu_category": "Pages",
+    "description": "Корзина покупок со списком выбранных товаров и итоговой суммой",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "корзина покупателя внутри админки — бессмысленно, это клиентская, не админская функция",
+    "status": "removed"
+  },
+  {
+    "id": "check-out",
+    "file": "html/check-out.html",
+    "menu_category": "Pages",
+    "description": "Оформление заказа: адрес доставки, способ оплаты, подтверждение",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "чекаут покупателя внутри админки — то же самое, не нужно",
+    "status": "removed"
+  },
+  {
+    "id": "wish-list",
+    "file": "html/wish-list.html",
+    "menu_category": "Pages",
+    "description": "Список отложенных (избранных) товаров",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "избранное покупателя внутри админки — не нужно",
+    "status": "removed"
+  },
+  {
+    "id": "signin",
+    "file": "html/signin.html",
+    "menu_category": "Pages",
+    "description": "Форма входа в аккаунт (email/пароль)",
+    "reusable_across": "универсально: вход в саму админку",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "signup",
+    "file": "html/signup.html",
+    "menu_category": "Pages",
+    "description": "Форма регистрации нового аккаунта",
+    "reusable_across": "опционально: нужна ли самостоятельная регистрация в админке (обычно нет — заводит Admin)",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "forgot",
+    "file": "html/forgot.html",
+    "menu_category": "Pages",
+    "description": "Форма запроса восстановления пароля по email",
+    "reusable_across": "универсально: восстановление пароля сотрудника",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "reset",
+    "file": "html/reset.html",
+    "menu_category": "Pages",
+    "description": "Форма установки нового пароля",
+    "reusable_across": "универсально, дополняет forgot",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "lockscreen",
+    "file": "html/lockscreen.html",
+    "menu_category": "Pages",
+    "description": "Экран блокировки с аватаром пользователя и полем ввода пароля",
+    "reusable_across": "опционально: блокировка сессии сотрудника",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "underconstruction",
+    "file": "html/underconstruction.html",
+    "menu_category": "Pages",
+    "description": "Заглушка «страница в разработке»",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "заглушка, не нужна в рабочем эталоне",
+    "status": "removed"
+  },
+  {
+    "id": "404",
+    "file": "html/404.html",
+    "menu_category": "Pages",
+    "description": "Страница ошибки 404 (страница не найдена), минимальная разметка без сайдбара",
+    "reusable_across": "универсально: страница ошибки",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "500",
+    "file": "html/500.html",
+    "menu_category": "Pages",
+    "description": "Страница ошибки 500, минимальная разметка без сайдбара (текст сообщения совпадает с 404)",
+    "reusable_across": "универсально: страница ошибки",
+    "extra_deps": [],
+    "candidate_for_removal": false
+  },
+  {
+    "id": "501",
+    "file": "html/501.html",
+    "menu_category": "Pages",
+    "description": "Страница ошибки 501 с полным сайдбаром/шапкой вокруг блока ошибки",
+    "reusable_across": null,
+    "extra_deps": [],
+    "candidate_for_removal": true,
+    "note": "дубль 404/500, статус-код почти никогда не используется",
+    "status": "removed"
+  }
+]

@@ -104,6 +104,15 @@ if (Test-Path $screensFile) {
     Write-Host "Copied screens.md (design registry found)" -ForegroundColor Green
 }
 
+# Admin panel template (Valex, cleaned) — lives OUTSIDE the stack folder
+# on purpose: it is reference material for /sdd-admin to pick pages from,
+# not runtime code, so it must never be copied as part of the stack skeleton
+$adminTemplate = Join-Path $templateRoot "admin-templates\$Stack"
+if (Test-Path $adminTemplate) {
+    Copy-Item -Path $adminTemplate -Destination (Join-Path $inputDir "admin-template") -Recurse
+    Write-Host "Copied admin-template (page manifest + assets)" -ForegroundColor Green
+}
+
 $designDir = Join-Path $TzProject "00-input\design"
 if ((Test-Path $designDir) -and (Get-ChildItem $designDir -ErrorAction SilentlyContinue)) {
     Copy-Item -Path $designDir -Destination (Join-Path $inputDir "design") -Recurse
