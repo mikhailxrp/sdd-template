@@ -50,9 +50,51 @@ def extract_ids_from_tz(path):
     return ids
 
 
+RANGE_ANCHOR = re.compile(r"(FR-[A-Z][A-Z0-9]*|BR(?:-AI)?)-(\d{3})")
+SEGMENT = re.compile(r"\s*[…\-–]\s*(\d{3})|\s*,\s*(\d{3})")
+
+
 def extract_mentions(text):
-    """Все ID, упомянутые где угодно в тексте (для coverage/phases)."""
-    return set(re.findall(r"\b(?:FR-[A-Z][A-Z0-9]*|BR(?:-AI)?)-\d{3}\b", text))
+    """
+    Все ID, упомянутые где угодно в тексте (для coverage/phases).
+
+    Разворачивает сжатую нотацию диапазонов, которую документация
+    намеренно использует вместо построчного перечисления каждого ID
+    (см. planning-log.md, ADR-001 — не раздувать документацию):
+
+        FR-AUTH-001…005              -> 001, 002, 003, 004, 005
+        FR-ADM-001…002, 005, 008     -> 001, 002, 005, 008
+        FR-CARD-001…005, 007…009     -> 001..005, 007..009 (два диапазона)
+
+    Без разворота валидатор видит только первое число и ложно считает
+    остальные потерянными требованиями. Не привязан к конкретному
+    списку модулей (MARKET, CHANNELS и любые новые подхватываются
+    автоматически, т.к. регэксп общий: [A-Z][A-Z0-9]*).
+    """
+    ids = set()
+    for m in RANGE_ANCHOR.finditer(text):
+        prefix, first_num = m.group(1), m.group(2)
+        ids.add(f"{prefix}-{first_num}")
+
+        pos = m.end()
+        last_num = int(first_num)
+        # Читаем цепочку сегментов "…NNN" / "-NNN" / ", NNN" подряд,
+        # пока они идут без постороннего текста между ними.
+        while True:
+            sm = SEGMENT.match(text, pos)
+            if not sm:
+                break
+            range_end, single = sm.group(1), sm.group(2)
+            if range_end:
+                for n in range(last_num, int(range_end) + 1):
+                    ids.add(f"{prefix}-{n:03d}")
+                last_num = int(range_end)
+            else:
+                ids.add(f"{prefix}-{single}")
+                last_num = int(single)
+            pos = sm.end()
+
+    return ids
 
 
 def check(project_dir):

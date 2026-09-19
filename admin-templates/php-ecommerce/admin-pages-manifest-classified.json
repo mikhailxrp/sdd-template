@@ -452,5 +452,34 @@
     "candidate_for_removal": true,
     "note": "дубль 404/500, статус-код почти никогда не используется",
     "status": "removed"
+  },
+  {
+    "id": "sales-channels",
+    "file": "html/sales-channels.html",
+    "menu_category": "Pages",
+    "description": "Демо-вкладка «Каналы продаж»: переключатели подключения WhatsApp/Авито/Telegram/MAX + единый чат по всем каналам. Собственная вёрстка (df-* классы), не из Valex — не тянет общий assets/ шаблона",
+    "reusable_across": "требует FR-CHANNELS-* в tz.md проекта (раздел 8.3 брифа — нужен ли единый инбокс)",
+    "extra_deps": [],
+    "own_assets": ["assets/css/sales-channels.css"],
+    "status": "existing",
+    "placeholders": [],
+    "note": "Текст на странице универсален, плейсхолдеров не требует. Список каналов (WhatsApp/Авито/Telegram/MAX) фиксированный — если в брифе 8.3 отмечены не все, лишние переключатели можно оставить выключенными, не обязательно удалять из вёрстки"
+  },
+  {
+    "id": "integrations",
+    "file": "html/integrations.html",
+    "menu_category": "Pages",
+    "description": "Демо-вкладка «Интеграции»: переключатели подключения CRM, систем учёта, телефонии, рассылок. Собственная вёрстка, использует общий sales-channels.css",
+    "reusable_across": "любой проект с указанной хотя бы одной внешней системой в части 8 брифа (CRM и/или учётная система)",
+    "extra_deps": [],
+    "own_assets": ["assets/css/sales-channels.css"],
+    "status": "existing",
+    "placeholders": [
+      "{{PROJECT_NAME}}", "{{ADMIN_NAME}}", "{{YEAR}}",
+      "{{CRM_1_NAME}}", "{{CRM_2_NAME}}",
+      "{{ACCOUNTING_1_NAME}}", "{{ACCOUNTING_2_NAME}}"
+    ],
+    "note": "Если у клиента только одна CRM или одна учётная система — вторую строку (CRM_2/ACCOUNTING_2) нужно удалить из скопированного файла, не оставлять с плейсхолдером. Если ни CRM, ни учётной системы нет вообще — эта страница не копируется в проект, см. правило в sdd-admin.md"
   }
+
 ]

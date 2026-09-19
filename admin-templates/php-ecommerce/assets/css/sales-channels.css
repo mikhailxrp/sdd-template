@@ -1,0 +1,556 @@
+/* Общий шаблон панели управления: вкладки "Каналы продаж" и
+   "Интеграции" (sales-channels.html и integrations.html).
+   Названия сервисов на вкладке "Интеграции" — плейсхолдеры,
+   подставляются под конкретного клиента при заполнении SDD. */
+
+:root {
+  --df-primary: #4763e4;
+  --df-primary-dark: #3a52c4;
+  --df-bg: #f4f6fb;
+  --df-sidebar-bg: #171f39;
+  --df-sidebar-text: #aab1d0;
+  --df-sidebar-text-active: #ffffff;
+  --df-card-bg: #ffffff;
+  --df-border: #e6e9f2;
+  --df-text: #2b2f42;
+  --df-text-muted: #767f9e;
+  --df-success: #2bbf7c;
+  --df-info-bg: #eaf0ff;
+  --df-info-border: #c3d2ff;
+  --df-info-text: #2f4bb0;
+  --df-radius: 14px;
+  --df-sidebar-width: 264px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--df-bg);
+  color: var(--df-text);
+  min-height: 100vh;
+  display: flex;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+
+.df-sidebar {
+  width: var(--df-sidebar-width);
+  flex-shrink: 0;
+  background: var(--df-sidebar-bg);
+  color: var(--df-sidebar-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.df-sidebar__brand {
+  padding: 22px 24px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.df-sidebar__nav {
+  list-style: none;
+  margin: 0;
+  padding: 12px;
+  flex: 1;
+}
+
+.df-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.df-sidebar__item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.df-sidebar__item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--df-sidebar-text-active);
+}
+
+.df-sidebar__item.is-active {
+  background: var(--df-primary);
+  color: #ffffff;
+}
+
+.df-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.df-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: var(--df-card-bg);
+  border-bottom: 1px solid var(--df-border);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.df-topbar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.df-topbar__user svg {
+  width: 20px;
+  height: 20px;
+  color: var(--df-text-muted);
+}
+
+.df-topbar__logout {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--df-text-muted);
+  padding: 6px 12px;
+  border: 1px solid var(--df-border);
+  border-radius: 8px;
+}
+
+.df-topbar__logout svg {
+  width: 15px;
+  height: 15px;
+}
+
+.df-content {
+  padding: 28px 32px 8px;
+  flex: 1;
+}
+
+.df-footer {
+  padding: 18px 32px;
+  text-align: center;
+  color: var(--df-text-muted);
+  font-size: 13px;
+  border-top: 1px solid var(--df-border);
+  margin-top: 24px;
+}
+
+/* ── Page header ────────────────────────────────────────── */
+
+.df-page-header {
+  margin-bottom: 20px;
+}
+
+.df-page-header h1 {
+  font-size: 22px;
+  margin: 0 0 4px;
+}
+
+.df-page-header p {
+  margin: 0;
+  color: var(--df-text-muted);
+  font-size: 14px;
+}
+
+/* ── Alert ──────────────────────────────────────────────── */
+
+.df-alert {
+  background: var(--df-info-bg);
+  border: 1px solid var(--df-info-border);
+  color: var(--df-info-text);
+  border-radius: var(--df-radius);
+  padding: 14px 18px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+
+/* ── Cards ──────────────────────────────────────────────── */
+
+.df-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.df-col {
+  flex: 1 1 380px;
+  min-width: 0;
+}
+
+.df-card {
+  background: var(--df-card-bg);
+  border: 1px solid var(--df-border);
+  border-radius: var(--df-radius);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.df-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--df-border);
+}
+
+.df-card__title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.df-card__body {
+  padding: 4px 20px;
+}
+
+.df-card__body--flush {
+  padding: 0;
+}
+
+/* ── Toggle rows (каналы / интеграции) ─────────────────── */
+
+.df-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.df-list-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--df-border);
+}
+
+.df-list-row:last-child {
+  border-bottom: none;
+}
+
+.df-list-row__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #ffffff;
+}
+
+.df-list-row__icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.df-list-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.df-list-row__name {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.df-list-row__desc {
+  font-size: 12.5px;
+  color: var(--df-text-muted);
+  line-height: 1.4;
+}
+
+.df-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: #eef0f7;
+  color: var(--df-text-muted);
+  margin-top: 6px;
+}
+
+/* Color accents per channel/category */
+.df-icon--blue   { background: #4763e4; }
+.df-icon--green  { background: #25b06b; }
+.df-icon--sky    { background: #229ed9; }
+.df-icon--teal   { background: #00a19a; }
+.df-icon--violet { background: #7c5cf5; }
+.df-icon--amber  { background: #e8973a; }
+.df-icon--pink   { background: #e2568c; }
+
+/* ── Switch ─────────────────────────────────────────────── */
+
+.df-switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.df-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.df-switch__slider {
+  position: absolute;
+  inset: 0;
+  background: #d7dbe8;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.df-switch__slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.df-switch input:checked + .df-switch__slider {
+  background: var(--df-primary);
+}
+
+.df-switch input:checked + .df-switch__slider::before {
+  transform: translateX(18px);
+}
+
+.df-switch input:disabled + .df-switch__slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Buttons ────────────────────────────────────────────── */
+
+.df-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.df-btn--primary {
+  background: var(--df-primary);
+  color: #ffffff;
+}
+
+.df-btn--primary:hover {
+  background: var(--df-primary-dark);
+}
+
+.df-btn--save {
+  margin: 4px 0 28px;
+}
+
+/* ── Единый чат (макет) ─────────────────────────────────── */
+
+.df-chat {
+  display: flex;
+  min-height: 360px;
+}
+
+.df-chat__threads {
+  width: 44%;
+  border-right: 1px solid var(--df-border);
+}
+
+.df-thread {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--df-border);
+  cursor: default;
+}
+
+.df-thread.is-active {
+  background: var(--df-info-bg);
+}
+
+.df-thread svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--df-text-muted);
+}
+
+.df-thread.is-active svg {
+  color: var(--df-primary);
+}
+
+.df-thread__body {
+  min-width: 0;
+  flex: 1;
+}
+
+.df-thread__name {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.df-thread__preview {
+  font-size: 11.5px;
+  color: var(--df-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.df-thread__time {
+  font-size: 11px;
+  color: var(--df-text-muted);
+  flex-shrink: 0;
+}
+
+.df-chat__panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+}
+
+.df-chat__messages {
+  flex: 1;
+}
+
+.df-bubble {
+  max-width: 78%;
+  padding: 9px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.df-bubble--in {
+  background: #f0f2f8;
+  border-bottom-left-radius: 4px;
+}
+
+.df-bubble--out {
+  background: var(--df-primary);
+  color: #ffffff;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.df-bubble__time {
+  display: block;
+  margin-top: 4px;
+  font-size: 10.5px;
+  opacity: 0.65;
+  text-align: right;
+}
+
+.df-chat__input {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.df-chat__input input {
+  flex: 1;
+  border: 1px solid var(--df-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  background: #f7f8fb;
+}
+
+.df-chat__input button {
+  border: 1px solid var(--df-border);
+  background: #f7f8fb;
+  color: var(--df-text-muted);
+  border-radius: 10px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+
+  .df-sidebar {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+  }
+
+  .df-sidebar__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .df-content {
+    padding: 20px 16px 8px;
+  }
+
+  .df-topbar {
+    padding: 14px 16px;
+  }
+
+  .df-chat {
+    flex-direction: column;
+  }
+
+  .df-chat__threads {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--df-border);
+  }
+}
