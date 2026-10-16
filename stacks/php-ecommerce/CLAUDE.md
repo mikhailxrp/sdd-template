@@ -15,13 +15,13 @@
 
 Перед началом задачи читай нужные файлы:
 
-| Тема | Файл |
-|------|------|
-| Обзор продукта + фичи | `.docs/prd.md` |
-| Схема БД | `.docs/database.md` |
-| Текущая фаза | `.docs/phases/phase-N.md` |
-| Текущий таск | `TASK.md` |
-| Definition of Done | `.docs/dod-global.md` |
+| Тема                  | Файл                      |
+| --------------------- | ------------------------- |
+| Обзор продукта + фичи | `.docs/prd.md`            |
+| Схема БД              | `.docs/database.md`       |
+| Текущая фаза          | `.docs/phases/phase-N.md` |
+| Текущий таск          | `TASK.md`                 |
+| Definition of Done    | `.docs/dod-global.md`     |
 
 ---
 
@@ -29,16 +29,18 @@
 
 **Используем:**
 
-| Слой | Технология | Почему |
-|------|------------|--------|
-| Backend | PHP 8.x | Работает на любом shared-хостинге |
-| БД | MySQL 8 | Стандарт shared-хостинга |
-| Frontend | Bootstrap 5 + Vanilla JS | Без сборщиков |
-| Графики | Chart.js | Лёгкий, без зависимостей |
-| Авторизация | PHP Sessions + bcrypt | Встроено, безопасно |
-| Тестирование | PHPUnit (dev-зависимость через Composer) | Unit-тесты для чистой логики (Core-хелперы, Router); не деплоится на прод |
+| Слой         | Технология                               | Почему                                                                                                            |
+| ------------ | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Backend      | PHP 8.x                                  | Работает на любом shared-хостинге                                                                                 |
+| БД           | MySQL 8                                  | Стандарт shared-хостинга                                                                                          |
+| Frontend     | Bootstrap 5 + Vanilla JS                 | Без сборщиков                                                                                                     |
+| Админка      | Tabler 1.6.1 (на Bootstrap 5)            | Лежит локально в `public/assets/vendor/tabler/` (CSS, JS, виджеты, иконки); версию не обновлять вручную по частям |
+| Графики      | ApexCharts (из `libs/` Tabler)           | Уже входит в Tabler, не нужна вторая библиотека графиков                                                          |
+| Авторизация  | PHP Sessions + bcrypt                    | Встроено, безопасно                                                                                               |
+| Тестирование | PHPUnit (dev-зависимость через Composer) | Unit-тесты для чистой логики (Core-хелперы, Router); не деплоится на прод                                         |
 
 **Не используем — никогда:**
+
 - Next.js / React / Vue (требуют Node.js)
 - ORM (только PDO напрямую)
 - jQuery (только Vanilla JS)
@@ -66,27 +68,32 @@ storage/logs/    → логи приложения (вне document root, нед
 ## Правила по слоям
 
 ### Controllers
+
 - Принимают запрос → вызывают Model → передают данные в View
 - Никакого SQL
 - POST всегда заканчивается redirect()
 - Валидация входных данных здесь
 
 ### Models
+
 - Только SQL через PDO prepared statements
 - Возвращают массивы, не объекты PDO
 - Никакого HTML, никаких редиректов
 
 ### Views
+
 - Только HTML + echo переменных
 - Никакого SQL, никакой бизнес-логики
 - Весь вывод через htmlspecialchars()
 - Данные получают через переменные от Controller
 
 ### Services
+
 - Отправка email, работа с файлами, внешние API
 - Вызываются из Controllers, не из Views
 
 ### PHP
+
 - PSR-12 code style
 - `declare(strict_types=1)` в каждом файле
 - Функции, не классы (если не нужен DI)
@@ -94,17 +101,20 @@ storage/logs/    → логи приложения (вне document root, нед
 - Валидация и санитизация всего внешнего ввода
 
 ### CSS
+
 - Mobile-first
 - BEM: `block__element`, `block--modifier`
 - CSS custom properties вместо magic numbers
 - Никаких inline-стилей
 
 ### JS
+
 - ES Modules, async/await, arrow functions
 - Functional style — никаких классов
 - Никаких глобальных переменных
 
 ### HTML
+
 - Семантические теги: `<main>`, `<section>`, `<article>`, `<nav>`
 - `alt` на всех изображениях, `aria-*` где нужно
 - Никаких inline-стилей
