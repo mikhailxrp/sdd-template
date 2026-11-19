@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Creates a new SDD project: copies a stack starter and a finished
     TZ (from the tz-template pipeline) into a self-contained project
@@ -84,10 +84,12 @@ Write-Host ""
 
 Copy-Item -Path $stackDir -Destination $target -Recurse
 
-# reference/ and tools/ from the sdd-template (planning agent + validator)
+# reference/, workflow/, tools/, and agent wrappers (.claude/, .agents/) from sdd-template
 Copy-Item -Path (Join-Path $templateRoot "reference") -Destination $target -Recurse
+Copy-Item -Path (Join-Path $templateRoot "workflow")  -Destination $target -Recurse
 Copy-Item -Path (Join-Path $templateRoot "tools")     -Destination $target -Recurse
 Copy-Item -Path (Join-Path $templateRoot ".claude")   -Destination $target -Recurse -ErrorAction SilentlyContinue
+Copy-Item -Path (Join-Path $templateRoot ".agents")   -Destination $target -Recurse -ErrorAction SilentlyContinue
 
 Remove-Item (Join-Path $target "tools\sdd-new-project.ps1") -ErrorAction SilentlyContinue
 
@@ -157,7 +159,6 @@ Write-Host ""
 Write-Host "Done." -ForegroundColor Green
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Yellow
-Write-Host "  1. cd `"$target`""
-Write-Host "  2. claude"
-Write-Host "  3. /sdd-init"
+Write-Host "  1. Open `"$target`" in Antigravity or run: cd `"$target`" ; claude"
+Write-Host "  2. Run /sdd-init (or sdd-init)"
 Write-Host ""

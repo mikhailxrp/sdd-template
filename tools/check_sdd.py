@@ -168,14 +168,18 @@ def check(project_dir):
             ".docs/dod-global.md отсутствует или пуст — стартер скопирован "
             "не полностью."))
 
-    # CLAUDE.md — плейсхолдеры
-    claude_path = os.path.join(project_dir, "CLAUDE.md")
-    if os.path.exists(claude_path):
-        claude_text = open(claude_path, encoding="utf-8").read()
-        if "< " in claude_text and " >" in claude_text:
+    # AGENTS.md (или CLAUDE.md в старых проектах) — плейсхолдеры
+    rules_file = "AGENTS.md"
+    rules_path = os.path.join(project_dir, rules_file)
+    if not os.path.exists(rules_path):
+        rules_file = "CLAUDE.md"
+        rules_path = os.path.join(project_dir, rules_file)
+    if os.path.exists(rules_path):
+        rules_text = open(rules_path, encoding="utf-8").read()
+        if "< " in rules_text and " >" in rules_text:
             issues.append(Issue("WARN",
-                "CLAUDE.md содержит незаполненные плейсхолдеры вида < ... > "
-                "— sdd-init должен был их закрыть."))
+                f"{rules_file} содержит незаполненные плейсхолдеры вида < ... > "
+                f"— sdd-init должен был их закрыть."))
 
     return issues, tz_ids, all_covered, uncovered
 

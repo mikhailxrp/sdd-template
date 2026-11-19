@@ -3,7 +3,7 @@
 Шаблон для быстрого старта PHP-проекта с готовой документацией и ядром приложения.
 
 **Стек:** PHP 8.x + MySQL + Bootstrap 5 + Tabler (админка) + Vanilla JS
-**Инструмент разработки:** Claude Code (VS Code) — все промпты и правила ниже рассчитаны на него
+**Инструмент разработки:** любой агент, понимающий `AGENTS.md` — Claude Code (через `CLAUDE.md`) или Antigravity. Промпты и правила одинаковы для обоих
 
 ---
 
@@ -25,7 +25,8 @@
 ```
 _php-starter-template/
 │
-├── CLAUDE.md                    ← Конституция проекта для агента
+├── AGENTS.md                    ← Конституция проекта для агента (единая для всех сред)
+├── CLAUDE.md                    ← Точка входа Claude Code: подключает AGENTS.md и .docs/rules/ (не править)
 ├── TASK.md                      ← Текущий активный таск
 ├── TASK-example.md              ← Шаблон для создания тасков
 ├── current-pipeline.md          ← Схема процесса разработки
@@ -34,15 +35,15 @@ _php-starter-template/
 ├── composer.json                ← PHPUnit (dev-only), автозагрузка tests/
 ├── phpunit.xml                  ← Конфиг PHPUnit
 │
-├── .claude/rules/                ← Правила для Claude Code (подгружаются автоматически)
-│   ├── general.md                ← Универсальные правила кода
-│   └── php.md                    ← Правила PHP
-│
 ├── .docs/                       ← Вся документация проекта
 │   ├── prd.md                   ← Описание продукта (ЗАПОЛНИТЬ)
 │   ├── database.md              ← Схема БД (дозаполнить под свой продукт)
 │   ├── dod-global.md            ← Глобальный чеклист готовности
 │   ├── dev-log.md               ← Журнал сессий
+│   ├── rules/                   ← Правила кода (подключены из AGENTS.md / CLAUDE.md)
+│   │   ├── general.md           ← Универсальные правила кода
+│   │   ├── php.md               ← Правила PHP
+│   │   └── seo.md               ← Правила SEO/GEO
 │   ├── phases/
 │   │   ├── _status.md           ← Статус всех фаз
 │   │   └── phase-example.md     ← Шаблон фазы
@@ -107,7 +108,7 @@ _php-starter-template/
 | `.docs/database.md`       | Дозаполнить под свой продукт — базовые e-commerce таблицы (users/categories/products/cart/orders/order_items/payment_logs) уже есть, добавляй только специфичные |
 | `.env`                    | Заполнить на основе `.env.example`                                                                                                                               |
 | `config/config.php`       | Поменять название проекта                                                                                                                                        |
-| `CLAUDE.md`               | Обновить раздел "О проекте"                                                                                                                                      |
+| `AGENTS.md`               | Обновить раздел "О проекте"                                                                                                                                      |
 | `.docs/phases/_status.md` | Очистить таблицу фаз — оставить только структуру                                                                                                                 |
 
 ### Универсальные файлы — не трогать:
@@ -118,7 +119,7 @@ _php-starter-template/
 | `.htaccess`, `public/.htaccess`      | Редирект + `Options -Indexes` (запрет листинга директорий)                                                       |
 | `public/uploads/.htaccess`           | Запрещает выполнение PHP в папке загрузок — защита от RCE через подделанный тип файла. Не удалять и не ослаблять |
 | `public/index.php`                   | Универсальный front controller                                                                                   |
-| `.claude/rules/*.md`                 | Правила кода универсальны                                                                                        |
+| `.docs/rules/*.md`, `CLAUDE.md`      | Правила кода универсальны                                                                                        |
 | `.docs/dod-global.md`                | Подходит для любого PHP проекта                                                                                  |
 | `.docs/prompts/*.md`                 | Промпты универсальны                                                                                             |
 | `phpunit.xml`, `tests/bootstrap.php` | Конфиг тестов универсален                                                                                        |
@@ -147,7 +148,7 @@ _php-starter-template/
 ### Инициализация нового проекта (один раз)
 
 0. Есть ТЗ и/или скриншоты интерфейса → скопировать промпт из
-   `.docs/prompts/project-init.md`, отправить в чат Claude Code вместе
+   `.docs/prompts/project-init.md`, отправить в чат агента вместе
    с ТЗ/скриншотами → агент заполняет `prd.md` и дополняет
    `database.md` → подтвердить
 
@@ -160,16 +161,16 @@ _php-starter-template/
 ### Планирование новой фазы
 
 4. Скопировать промпт из `.docs/prompts/phase-init.md`
-5. Отправить в чат Claude Code → агент предлагает план → подтвердить
+5. Отправить в чат агента → агент предлагает план → подтвердить
 
 ### Создание таска
 
 6. Скопировать промпт из `.docs/prompts/task-init.md`
-7. Отправить в чат Claude Code → агент создаёт TASK.md → подтвердить
+7. Отправить в чат агента → агент создаёт TASK.md → подтвердить
 
 ### Реализация
 
-8. Сказать агенту: `Реализуй задачу из TASK.md. Следуй CLAUDE.md`
+8. Сказать агенту: `Реализуй задачу из TASK.md. Следуй AGENTS.md`
 9. Агент пишет код
 
 ### Проверка

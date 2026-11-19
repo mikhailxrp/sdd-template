@@ -66,7 +66,7 @@
 | name | VARCHAR(200) NOT NULL | |
 | slug | VARCHAR(220) NOT NULL UNIQUE | |
 | description | TEXT NULL | |
-| price | DECIMAL(10,2) NOT NULL | никогда FLOAT — см. `php.md` |
+| price | DECIMAL(10,2) NOT NULL | никогда FLOAT — см. `.docs/rules/php.md` |
 | stock_quantity | INT NOT NULL DEFAULT 0 | |
 | is_active | TINYINT(1) NOT NULL DEFAULT 1 | товар не удаляют физически, а деактивируют |
 | seo_title | VARCHAR(70) NULL | если пусто — генерируется по шаблону, см. правило ниже |
@@ -119,7 +119,7 @@
 **Индексы:** `INDEX(session_id)`, `INDEX(user_id)`
 
 > Цена здесь никогда не хранится — при чекауте всегда перечитывается из
-> `products` (см. правило "server is the source of truth" в `general.md`).
+> `products` (см. правило "server is the source of truth" в `.docs/rules/general.md`).
 > Ровно одно из `session_id` / `user_id` должно быть заполнено — проверяется
 > в Model, а не constraint'ом БД.
 
@@ -131,7 +131,7 @@
 |---------|-----|------------|
 | id | INT PK AUTO_INCREMENT | |
 | user_id | INT NULL, FK → users.id, **ON DELETE SET NULL** | гостевой заказ = NULL |
-| status | ENUM('created','paid','shipped','cancelled') NOT NULL DEFAULT 'created' | меняется только через одну функцию-переход, см. `php.md` |
+| status | ENUM('created','paid','shipped','cancelled') NOT NULL DEFAULT 'created' | меняется только через одну функцию-переход, см. `.docs/rules/php.md` |
 | total | DECIMAL(10,2) NOT NULL | |
 | created_at | TIMESTAMP DEFAULT NOW | |
 | updated_at | TIMESTAMP DEFAULT NOW ON UPDATE CURRENT_TIMESTAMP | |
@@ -175,7 +175,7 @@
 
 **Индексы:** `INDEX(order_id)`
 
-> Обязательна, потому что `php.md` уже требует: «верифицировать подпись
+> Обязательна, потому что `.docs/rules/php.md` уже требует: «верифицировать подпись
 > вебхука и логировать каждый вызов». Без этой таблицы требование нечем
 > подтвердить при разборе спорного платежа.
 
