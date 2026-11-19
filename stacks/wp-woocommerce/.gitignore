@@ -1,0 +1,52 @@
+# WordPress core (ставится локально в OpenServer / на хостинге, в git не хранится)
+/wp-admin/
+/wp-includes/
+/index.php
+/license.txt
+/readme.html
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config-sample.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
+/xmlrpc.php
+
+# Конфигурация с секретами и локальные файлы (CORE-10)
+wp-config.php
+wp-config-local.php
+.env
+.htaccess
+
+# Загрузки, кэш, логи, языки ядра
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/wflogs/
+wp-content/backups/
+wp-content/languages/
+wp-content/debug.log
+*.log
+
+# Сторонние темы и плагины (ставятся из репозитория WP, в git — только кастомные)
+wp-content/themes/twenty*
+wp-content/plugins/*
+!wp-content/plugins/.gitkeep
+# Раскомментировать для проектного плагина, если включён пакет custom-plugin:
+# !wp-content/plugins/<project-plugin>/
+
+# Composer / IDE / ОС
+vendor/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.sql
+*.sql.gz
+*.zip

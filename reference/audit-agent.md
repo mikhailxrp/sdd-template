@@ -42,6 +42,10 @@
   php artisan serve
   # при необходимости: php artisan queue:work; тесты: vendor/bin/pest
   ```
+- **Стек `wp-woocommerce` (WordPress + WooCommerce, OpenServer / shared-хостинг):**
+  - Локальный сайт открывается по домену OpenServer из `.docs/prd.md` (например, `http://project.local/`).
+  - Логи PHP/WP: `wp-content/debug.log` (при `WP_DEBUG_LOG = true` в `wp-config-local.php`).
+  - Проверки в консоли: `php -l` по PHP-файлам темы/плагина, `phpcs` (если установлен), `wp plugin list` / `wp wc ...` через WP-CLI (если установлен).
 
 Доступ и параметры БД (MySQL/MariaDB или PostgreSQL) — из `.env`/`.env.example` в
 корне проекта. Если файла `.env` нет (только `.env.example`) —

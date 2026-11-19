@@ -8,7 +8,7 @@
     Project name. Becomes the folder name.
 
 .PARAMETER Stack
-    Folder name under stacks\ (e.g. "php-ecommerce", "laravel").
+    Folder name under stacks\ (e.g. "php-ecommerce", "laravel", "wp-woocommerce").
 
 .PARAMETER TzProject
     Path to a finished TZ project (from the tz-template pipeline).
