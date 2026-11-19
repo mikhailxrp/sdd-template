@@ -7,6 +7,8 @@ description: Шаг 3. Спланировать реальные фазы раз
 - `reference/sdd-planning-agent.md`
 - `.docs/prd.md`, `.docs/database.md`, `.docs/planning-log.md` —
   результат шагов 1-2
+- `.docs/capabilities.md` (если существует — подсказки по фазам и рискам
+  включённых пакетов после `/sdd-capabilities`)
 - `.docs/phases/_status.md`, `.docs/phases/phase-example.md` —
   формат фаз из стартера
 - `00-input/tz.md`:

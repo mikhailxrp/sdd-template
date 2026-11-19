@@ -25,6 +25,9 @@
   описанием из ТЗ
 - добавить строку в таблицу документации, если появился новый
   файл (например `.docs/modules/`, `00-input/screens.md`)
+- в стеках с `capabilities/` — вставлять или удалять блоки пакетов
+  строго командой `sdd-capabilities` по якорям `<!-- sdd-capabilities: … -->`
+  и маркерам `<!-- capability:<name>:begin/end -->`
 
 Всё остальное в `AGENTS.md` — решения о стеке и структуре кода,
 уже принятые до тебя. Не переписывай архитектурные правила «под ТЗ» —
@@ -96,6 +99,7 @@ Antigravity — как одноимённый скилл (обёртка в `.ag
 | Шаг | Что делает |
 |---|---|
 | `sdd-init` | `prd.md` §1-2: о продукте, роли, стек-отличия от базового |
+| `sdd-capabilities` | (если в стартере есть `capabilities/`) сборка блоков включённых пакетов в `AGENTS.md`, `database.md`, `dod-global.md` и `.docs/capabilities.md` |
 | `sdd-schema` | `database.md`: новые таблицы/колонки из модели данных ТЗ |
 | `sdd-roadmap` | `prd.md` роадмап + `.docs/phases/_status.md`: реальные фазы |
 | `sdd-admin` | (если в стартере есть Tabler) `.docs/admin-assembly.md`: план экранов админки |

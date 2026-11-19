@@ -8,7 +8,7 @@
     Project name. Becomes the folder name.
 
 .PARAMETER Stack
-    Folder name under stacks\ (e.g. "php-ecommerce").
+    Folder name under stacks\ (e.g. "php-ecommerce", "laravel").
 
 .PARAMETER TzProject
     Path to a finished TZ project (from the tz-template pipeline).
@@ -161,4 +161,7 @@ Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Yellow
 Write-Host "  1. Open `"$target`" in Antigravity or run: cd `"$target`" ; claude"
 Write-Host "  2. Run /sdd-init (or sdd-init)"
+if (Test-Path (Join-Path $target "capabilities")) {
+    Write-Host "  3. Run /sdd-capabilities (assemble enabled capability packages from prd.md)"
+}
 Write-Host ""

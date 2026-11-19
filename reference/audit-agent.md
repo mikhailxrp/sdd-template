@@ -33,13 +33,17 @@
 
 ## Команды запуска (уточни при первом использовании)
 
-Стек — PHP. Стандартный запуск для разработки:
+- **Стек `php-ecommerce` (PHP + MySQL/MariaDB):**
+  ```powershell
+  php -S localhost:8000 -t public
+  ```
+- **Стек `laravel` (Laravel + PostgreSQL):**
+  ```powershell
+  php artisan serve
+  # при необходимости: php artisan queue:work; тесты: vendor/bin/pest
+  ```
 
-```powershell
-php -S localhost:8000 -t public
-```
-
-БД — MySQL/MariaDB, доступ и параметры — из `.env`/`.env.example` в
+Доступ и параметры БД (MySQL/MariaDB или PostgreSQL) — из `.env`/`.env.example` в
 корне проекта. Если файла `.env` нет (только `.env.example`) —
 скопируй и заполни тестовыми значениями, не выдумывай боевые пароли.
 
