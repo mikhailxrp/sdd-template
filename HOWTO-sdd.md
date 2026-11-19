@@ -92,7 +92,11 @@ SDD-проекте — это правила для **будущего прог�
 Из корня `sdd-template`:
 
 ```powershell
+# Пример для стека PHP (shared-хостинг, e-commerce)
 .\tools\sdd-new-project.ps1 -Name domform-sdd -Stack php-ecommerce -TzProject D:\Development\domform
+
+# Пример для стека Laravel (VPS, модульные пакеты capabilities)
+.\tools\sdd-new-project.ps1 -Name autochem-sdd -Stack laravel -TzProject D:\Development\autochem
 ```
 
 Что произойдёт само:
@@ -279,6 +283,7 @@ python tools\check_sdd.py .
 | В `database.md` появилась таблица, дублирующая существующую | Скажите агенту свериться с `planning-log.md` — возможно, решение уже принято раньше |
 | Фазы идут в странном порядке                                | Спросите агента, почему — по правилу, он обязан объяснить зависимости в `_status.md` |
 | `check_sdd.py` находит непокрытые требования                | Пройдите `tz-coverage.md`, найдите, на каком шаге их пропустили, повторите этот шаг |
+| В проекте на `laravel` позже понадобился новый пакет (например, оплата) | Запустите `/sdd-capabilities add <name>` (или `remove <name>` для отключения); исходники берутся из первого коммита проекта или `sdd-template` |
 
 ---
 
@@ -288,8 +293,9 @@ python tools\check_sdd.py .
    работа всегда идёт в отдельной папке проекта.
 
 2. **`AGENTS.md` (и `CLAUDE.md`) в SDD-проекте — не для нас.** Это правила
-   для будущего кода: в `AGENTS.md` мы только заполняем «О проекте» и
-   таблицу документации, а `CLAUDE.md` вообще не трогаем.
+   для будущего кода: в `AGENTS.md` мы только заполняем «О проекте»,
+   таблицу документации и (в стеке `laravel`) собираем блоки пакетов
+   командой `/sdd-capabilities`, а `CLAUDE.md` вообще не трогаем.
 
 3. **`/sdd-review` — новой сессией (или новым чатом).** Так же, как и в
    ТЗ-цехе: автор своих ошибок не видит.
@@ -299,8 +305,9 @@ python tools\check_sdd.py .
 ## Шпаргалка
 
 ```powershell
-# Новый SDD-проект (из корня sdd-template)
+# Новый SDD-проект (из корня sdd-template): стек php-ecommerce или laravel
 .\tools\sdd-new-project.ps1 -Name имя-sdd -Stack php-ecommerce -TzProject D:\Development\имя-тз-проекта
+.\tools\sdd-new-project.ps1 -Name имя-sdd -Stack laravel -TzProject D:\Development\имя-тз-проекта
 
 # Дальше открыть ..\имя-sdd в Antigravity или запустить Claude Code:
 cd ..\имя-sdd
@@ -309,9 +316,10 @@ claude
 
 ```
 /sdd-init
+/sdd-capabilities       → только для стеков с capabilities/ (например, laravel)
 /sdd-schema
 /sdd-roadmap
-/sdd-admin              → только если в проекте есть админка (Tabler в стартере)
+/sdd-admin              → только если в проекте есть Tabler (php-ecommerce; для Filament в laravel не нужен)
 /sdd-modules <КОД>      → только для крупных проектов
                         → начать новую сессию (Claude Code: exit → claude; Antigravity: новый чат)
 /sdd-review
