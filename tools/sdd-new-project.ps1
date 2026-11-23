@@ -131,7 +131,9 @@ if (-not $NoGit) {
     Push-Location $target
     try {
         git init -q
-        git config core.hooksPath .githooks 2>$null
+        if (Test-Path (Join-Path $target ".githooks")) {
+            git config core.hooksPath .githooks 2>$null
+        }
         git config core.autocrlf false
         git add . 2>$null
         git commit -q -m "init: $Stack stack + tz.md from $Name" 2>$null

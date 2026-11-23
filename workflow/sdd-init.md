@@ -39,7 +39,7 @@ description: Шаг 1. Заполнить prd.md §1-2 (о продукте, р�
 
 ## Не делай
 
-- Не трогай `.docs/database.md` — это следующий шаг (`sdd-schema`)
+- Не трогай `.docs/database.md` — это шаг `sdd-schema` (а для стеков с `capabilities/`, таких как `laravel` и `wp-woocommerce`, сначала идёт шаг 1.5 — `sdd-capabilities`)
 - Не планируй фазы — это `sdd-roadmap`
 - Не читай требования раздела 8 целиком
 
